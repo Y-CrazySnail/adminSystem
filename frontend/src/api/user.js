@@ -4,9 +4,8 @@ import qs from 'qs'
 const grant_type = 'password'
 
 export function login(data) {
-  console.log(data)
   return request({
-    baseURL: process.env.VUE_APP_AUTH_API,
+    baseURL: 'auth',
     url: '/oauth/token',
     method: 'post',
     data: qs.stringify({ grant_type: grant_type, username: data.username, password: data.password })
@@ -15,9 +14,9 @@ export function login(data) {
 
 export function getInfo(token) {
   return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
+    baseURL: 'auth',
+    url: '/user/info',
+    method: 'post'
   })
 }
 

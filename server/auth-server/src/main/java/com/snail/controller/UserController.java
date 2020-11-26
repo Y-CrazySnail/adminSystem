@@ -8,6 +8,8 @@ import com.snail.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -37,5 +39,10 @@ public class UserController extends BaseController<User> {
         user.setCredentialsNonExpired(true);
         usersService.save(user);
         return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("info")
+    public Authentication info(){
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 }
